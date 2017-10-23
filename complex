@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+struct complex_t {
+    float real;
+    float imag;
+};
+complex_t comple, l;
+float real,d , f;
+float imag;
+char a,op;
+bool read( istream & stream, complex_t & complex )
+{
+    if(stream >> a && a=='(' && stream >> real && stream >> a && a ==',' && stream >> imag && stream >> a && a ==')')
+    {
+        complex.real = real;
+        complex.imag = imag;
+        return true;
+    }
+    return false;
+};
+void write(ostream & stream, complex_t & complex )
+{
+    cout<< '(' << d << ',' << f << ')';
+}
+complex_t add( complex_t b, complex_t c )
+{
+   d = b.real + c.real ;
+    f = b.imag + c.imag;
+    l.real = d;
+    l.imag = f;
+}
+complex_t sub( complex_t b, complex_t c )
+{
+    d = b.real - c.real ;
+    f = b.imag - c.imag;
+    l.real = d;
+    l.imag = f;
+}
+complex_t mul( complex_t b, complex_t c )
+{
+    d = (b.real * c.real) - (b.imag * c.imag) ;
+    f = (b.imag * c.real) + (b.real * c.imag);
+    l.real = d;
+    l.imag = f;
+}
+complex_t div( complex_t b, complex_t c )
+{
+    d = ((b.real * c.real) - (b.imag * c.imag))/(c.real*c.real + c.imag*c.imag) ;
+    f = ((b.imag * c.real) - (b.real * c.imag))/(c.real*c.real + c.imag*c.imag);
+    l.real = d;
+    l.imag = f;
+}
+int main() {
+    complex_t b,c;
+    read(cin,b);
+    cin >> op;
+    read(cin,c);
+    switch (op)
+    {
+        case '+':
+            add(b,c);
+           write(cout,l);
+           // cout << d << f;
+            break;
+        case '-':
+            sub(b,c);
+            write(cout,l);
+
+            break;
+        case'*':
+            mul(b,c);
+            write(cout,l);
+            break;
+        case '/':
+            div(b,c);
+            write(cout,l);
+            break;
+    }
+
+    return 0;
+}
